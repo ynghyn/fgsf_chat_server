@@ -3,6 +3,9 @@
 Rails 4.2.2
 Ruby 2.2
 
+Controller:
+rails generate controller Chat
+
 DB initialization:
 rails generate model ChatRoom name:string private:boolean
 rails generate model NameChange name:string user:references

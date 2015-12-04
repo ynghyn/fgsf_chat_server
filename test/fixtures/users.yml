@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  macAdderss: MyString
+  ipAdderss: MyString
+  disabled: false
+  lastLoggedInAt: 2015-12-03 16:01:10
+
+two:
+  macAdderss: MyString
+  ipAdderss: MyString
+  disabled: false
+  lastLoggedInAt: 2015-12-03 16:01:10

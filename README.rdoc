@@ -1,28 +1,12 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 4.2.2
+Ruby 2.2
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+DB initialization:
+rails generate model ChatRoom name:string private:boolean
+rails generate model NameChange name:string user:references
+rails generate model User macAdderss:string ipAdderss:string disabled:boolean lastLoggedInAt:timestamp
+rails generate migration add_namechange_to_user namechange:references
+rails generate model Message message:string user:references chatroom:references
+rake db:migrate

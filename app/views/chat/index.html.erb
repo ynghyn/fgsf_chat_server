@@ -1,9 +1,14 @@
 <input id="user_id" value="<%= @user_id %>" hidden>
 <input id="chatroom_id" value="<%= @chatroom_id %>" hidden>
+<input id="color" value="<%= @color %>" hidden>
 
 <div class="container-fluid site-wrapper">
   <div class="masthead">
-      <h3>FGSF</h3>
+    <h3>
+			<div id="colorpicker"></div>
+			FGSF -
+			<a id="name_change" contenteditable="true" href="#"><%= @user.name %></a>
+		</h3>
   </div>
 
   <div id="message_box" class="inner"></div>
@@ -13,8 +18,8 @@
 		  <span class="input-group-addon" id="sizing-addon2"></span>
 		  <input id="message" type="text" class="form-control" aria-describedby="sizing-addon2">
 		  <span class="input-group-btn">
-	      	<button id="post" class="btn btn-primary" type="button">Send</button>
-	      </span>
+      	<button id="post" class="btn btn-primary" type="button">Send</button>
+      </span>
 	  </div>
   </div>
 </div>

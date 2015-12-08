@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get 'chat/get_messages' => 'chat#get_messages'
   post 'chat/create_message' => 'chat#create_message'
   put 'chat/update_name' => 'chat#update_name'
+  put 'chat/update_color' => 'chat#update_color'
 end

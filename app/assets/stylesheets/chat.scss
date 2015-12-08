@@ -1,3 +1,52 @@
 // Place all the styles related to the chat controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+  height: 100%;
+  background-color: #333;
+}
+
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.site-wrapper {
+  height: 100%;
+  min-height: 100%;
+	vertical-align: top;
+	/* Overwrite padding */
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*
+ * Header
+ */
+.masthead {
+  height: 50 px;
+	display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff; /* IE8 proofing */
+  color: rgba(255,255,255,.75);
+}
+
+/* Body */
+.inner {
+	overflow: auto;
+  background-color: white;
+  text-align: left;
+  color: black;
+	padding: 0 20px;
+  height: calc(100% - (50px + 34px));
+}
+
+/*
+ * Footer
+ */
+.mastfoot {
+	height: 34px;
+}

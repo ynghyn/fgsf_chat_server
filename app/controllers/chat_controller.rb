@@ -1,19 +1,21 @@
 class ChatController < ApplicationController
-
   def index
     # Create user and store in cookie if one doesn't exist
     if !cookies[:user_id]
       user = create_and_get_user
-      cookies[:user_id] = user.id
+      cookies[:user_id] = {
+        value: user.id,
+        expires: 10.years.from_now
+      }
     end
-    messages = Message.get_last_messages(ChatRoom::PUBLIC_CHATROOM_ID)
-    render json: format_json_messages(messages)
+    @chatroom_id = ChatRoom::PUBLIC_CHATROOM_ID
+    @user_id = cookies[:user_id]
   end
 
   def get_messages
-    raise ArgumentError.new("invalid argument") unless params[:chatroom_id] && params[:message_id]
-    messages = Message.get_new_messages(params[:message_id], params[:chatroom_id])
-    render json: format_json_messages(messages)
+    raise ArgumentError.new("invalid argument") unless params[:chatroom_id]
+    messages = Message.get_new_messages(params[:message_id].to_i, params[:chatroom_id])
+    render json: format_html_message(messages)
   end
 
   def update_name
@@ -29,7 +31,8 @@ class ChatController < ApplicationController
     raise ArgumentError.new("invalid argument") unless params[:user_id] && params[:chatroom_id] && params[:message]
     user = User.find(params[:user_id])
     chatroom = ChatRoom.find(params[:chatroom_id])
-    Message.create(:user => user, :chatroom => chatroom, :message => params[:message])
+    message = params[:message]
+    Message.create(:user => user, :chatroom_id => chatroom.id, :message => message)
     messages = Message.get_last_messages(params[:chatroom_id])
     render json: format_json_messages(messages)
   end
@@ -41,13 +44,20 @@ class ChatController < ApplicationController
   end
 
   def format_json_messages(messages)
-    messages.map! do |message|
+    messages = messages.map do |message|
       {
         :user => message.user.name,
         :message => message.message,
         :created_at => message.created_at
       }
     end
+    { :messages => messages }
+  end
+  
+  def format_html_message(messages)
+	  messages = messages.map do |message|
+	  	"#{message.user.name} [#{l message.created_at, format: :short}]: #{message.message}"
+		end
     { :messages => messages }
   end
 end

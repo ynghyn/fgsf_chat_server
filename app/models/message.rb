@@ -9,6 +9,6 @@ class Message < ActiveRecord::Base
   end
 
   def self.get_new_messages(message_id, chatroom_id)
-    Message.where("id > ? AND chatroom_id = ?", message_id, chatroom_id)
+    Message.where("id > ? AND chatroom_id = ?", message_id, chatroom_id).last(NUM_MSGS_TO_RETRIEVE)
   end
 end

@@ -3,6 +3,9 @@
 Rails 4.2.2
 Ruby 2.2
 
+sudo rails s -b 0.0.0.0 -p 80
+
+
 Controller:
 rails generate controller Chat
 
@@ -13,3 +16,18 @@ rails generate model User macAdderss:string ipAdderss:string disabled:boolean la
 rails generate migration add_namechange_to_user namechange:references
 rails generate model Message message:string user:references chatroom:references
 rake db:migrate
+
+Controller:
+
+Models:
+
+Views:
+
+
+FUTURE WORK:
+1) For TCP enabled client-server connection, use Puma
+gem 'puma'
+bundle exec puma -p 80
+site: http://ngauthier.com/2013/02/rails-4-sse-notify-listen.html
+site: http://tenderlovemaking.com/2012/07/30/is-it-live.html
+puma: http://puma.io/

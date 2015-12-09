@@ -29,9 +29,11 @@
 
 5. Run Rails server
 	1. On foreground process
+
 		`>> rails s -b 0.0.0.0 -p 80`
 		- 0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
 	2. In background process as daemon:
+
 		`>> rails s -b 0.0.0.0 -p80 -d`
 		* to kill daemon
 	

@@ -5,44 +5,44 @@
 
 1. Setup RVM with Ruby 2.2.3 (SQLite is given by RVM and Rails 4.2.5 is defined within the Rails project)
 
-`>> \curl -sSL https://get.rvm.io | bash -s stable --ruby`
+	`>> \curl -sSL https://get.rvm.io | bash -s stable --ruby`
 
-`>> rvm install ruby-2.2.3`
+	`>> rvm install ruby-2.2.3`
 
-`>> rvm --default use ruby-2.2.3`
+	`>> rvm --default use ruby-2.2.3`
 
 2. Clone fgsf chat server from Github
 
-`>> git clone https://github.com/ynghyn/fgsf_chat_server workspace`
+	`>> git clone https://github.com/ynghyn/fgsf_chat_server workspace`
 
 3. Bundle gems and initialize DB
 
-`>> bundle install`
+	`>> bundle install`
 
-`>> rake db:migrate`
+	`>> rake db:migrate`
 
 4. Initialize db entry for a chatroom
 
-`>> rails console`
+	`>> rails console`
 
-`>> ChatRoom.create(:name => "Public")`
+	`>> ChatRoom.create(:name => "Public")`
 
 5. Run Rails server
 	1. On foreground process
 	
-	`>> sudo rails s -b 0.0.0.0 -p 80`
+		`>> sudo rails s -b 0.0.0.0 -p 80`
 	
-	0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
+		0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
 
 	2. In background process as daemon:
 	
-	`>> sudo rails s -b 0.0.0.0 -p80 -d`
+		`>> sudo rails s -b 0.0.0.0 -p80 -d`
 	
-		`* to kill daemon`
+		* to kill daemon
 	
-		`>> cat tmp/pids/server.pid`
+			`>> cat tmp/pids/server.pid`
 	
-		`>> kill process_id`
+			`>> kill process_id`
 
 
 ### Initializing Rails app
@@ -62,19 +62,14 @@ rails generate migration add_namechange_to_user namechange:references
 rails generate model Message message:string user:references chatroom:references
 
 rails generate migration add_color_to_user color:string
-
 rake db:migrate
 
 #####Router:
-chat#index - initial user creation and info gathering logic
-
-chat/get_messages - retrieves last N messages for selected chatroom
-
-chat/create_message - posts a new message for current user
-
-chat/update_name - updates name of current user
-
-chat/update_color - chat#update_color'
+* chat#index - initial user creation and info gathering logic
+* chat/get_messages - retrieves last N messages for selected chatroom
+* chat/create_message - posts a new message for current user
+* chat/update_name - updates name of current user
+* chat/update_color - chat#update_color'
 
 #####Models:
 - User, NameChange, ChatRoom, Message

@@ -1,17 +1,36 @@
 == README
 
 = SETUP
-1) Setup Sqlite3
-2) RVM with Rails 4.2.5 and Ruby 2.2.3
-3) Runs on Webrick
-4) Ubuntu environment setup - http://railsapps.github.io/installrubyonrails-ubuntu.html
-5) ChatRoom.create(:name => "Public")
+-> For Ubuntu, refer to http://railsapps.github.io/installrubyonrails-ubuntu.html
 
-To run Rails in foreground process:
-sudo rails s -b 0.0.0.0 -p 80 (for wifi connection to http://yonghyuns-macbook.local/)
+1) Setup RVM with Ruby 2.2.3 (SQLite is given by RVM and Rails 4.2.5 is defined within the Rails project)
+>> \curl -sSL https://get.rvm.io | bash -s stable --ruby
+>> rvm install ruby-2.2.3
+>> rvm --default use ruby-2.2.3
 
-To run Rails in background process as daemon:
-sudo rails s -b 0.0.0.0 -p80 -d (for wifi connection to http://yonghyuns-macbook.local/)
+2) Clone fgsf chat server from Github
+>> git clone https://github.com/ynghyn/fgsf_chat_server workspace
+
+3) Bundle gems and initialize DB
+>> bundle install
+>> rake db:migrate
+
+4) Initialize db entry for a chatroom
+>> rails console
+>> ChatRoom.create(:name => "Public")
+
+5) Run Rails server
+a) On foreground process
+>> sudo rails s -b 0.0.0.0 -p 80 (0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
+
+b) In background process as daemon:
+>> sudo rails s -b 0.0.0.0 -p80 -d
+# to kill daemon
+>> cat tmp/pids/server.pid
+>> kill process_id
+
+
+= Initializing Rails app
 
 Controller:
 rails generate controller Chat
@@ -33,10 +52,10 @@ chat/update_name - updates name of current user
 chat/update_color - chat#update_color'
 
 Models:
-	- User, NameChange, ChatRoom, Message
+- User, NameChange, ChatRoom, Message
 
 Views:
-	- 3 second interval AJAX to get_messages
+- Bootstrap, jQuery color picker
 
 
 = FUTURE WORK:

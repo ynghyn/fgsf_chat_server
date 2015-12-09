@@ -2,9 +2,10 @@
 
 = SETUP
 1) Setup Sqlite3
-2) RVM with Rails 4.2.2 and Ruby 2.2
+2) RVM with Rails 4.2.5 and Ruby 2.2.3
 3) Runs on Webrick
 4) Ubuntu environment setup - http://railsapps.github.io/installrubyonrails-ubuntu.html
+5) ChatRoom.create(:name => "Public")
 
 To run Rails in foreground process:
 sudo rails s -b 0.0.0.0 -p 80 (for wifi connection to http://yonghyuns-macbook.local/)

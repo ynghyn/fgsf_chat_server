@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   belongs_to :user
   belongs_to :chatroom
   
-  @@last_message_id = Message.last.id
+  @@last_message_id = (Message.last && Message.last.id) || 0
 
   after_create { @@last_message_id = Message.last.id }
 

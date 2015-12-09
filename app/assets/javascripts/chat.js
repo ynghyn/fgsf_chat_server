@@ -55,16 +55,18 @@ jQuery(document).ready(function($) {
 
 	// Posts message to server
 	function postMessage() {
-		var data = {
-			user_id: $("#user_id").val(),
-			chatroom_id: $("#chatroom_id").val(),
-			message: $("#message").val()
-		};
-		$.post( "chat/create_message", data, function(data) {
-			refreshView(true);
-		});
-		// clear message
-		$("#message").val('');
+		if ($("#message").val() != "") {
+			var data = {
+				user_id: $("#user_id").val(),
+				chatroom_id: $("#chatroom_id").val(),
+				message: $("#message").val()
+			};
+			$.post( "chat/create_message", data, function(data) {
+				refreshView(true);
+			});
+			// clear message
+			$("#message").val('');
+		}
 	}
 
 	// Refreshes message box if newer messsage has been found

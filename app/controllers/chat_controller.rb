@@ -52,8 +52,10 @@ class ChatController < ApplicationController
 
   def create_message
     raise ArgumentError.new("invalid argument") unless params[:user_id] && params[:chatroom_id] && params[:message]
-    user = User.find(params[:user_id])
-    Message.create(:user => user, :chatroom_id => params[:chatroom_id], :message => params[:message])
+    if !params[:message].to_s.empty?
+      user = User.find(params[:user_id])
+      Message.create(:user => user, :chatroom_id => params[:chatroom_id], :message => params[:message])
+    end
     render json: {}
   end
 

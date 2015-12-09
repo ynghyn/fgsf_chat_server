@@ -5,15 +5,15 @@
 
 1. Setup RVM with Ruby 2.2.3 (SQLite is given by RVM and Rails 4.2.5 is defined within the Rails project)
 
-	`>> \curl -sSL https://get.rvm.io | bash -s stable --ruby`
+	`>> curl -SSL https://get.rvm.io | bash -s stable --ruby`
 
 	`>> rvm install ruby-2.2.3`
 
 	`>> rvm --default use ruby-2.2.3`
 
-2. Clone fgsf chat server from Github
+2. Clone FGSF chat server from Github
 
-	`>> git clone https://github.com/ynghyn/fgsf_chat_server workspace`
+	`>> git clone https://github.com/ynghyn/fgsf_chat_server`
 
 3. Bundle gems and initialize DB
 
@@ -25,7 +25,7 @@
 
 	`>> rails console`
 
-	`>> ChatRoom.create(:name => "Public")`
+	`console> ChatRoom.create(:name => "Public")`
 
 5. Run Rails server
 	1. On foreground process

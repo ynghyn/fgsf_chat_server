@@ -1,6 +1,6 @@
 # FGSF Chat Server
 
-##### SETUP
+### SETUP
 - For Ubuntu, refer to http://railsapps.github.io/installrubyonrails-ubuntu.html
 
 1. Setup RVM with Ruby 2.2.3 (SQLite is given by RVM and Rails 4.2.5 is defined within the Rails project)
@@ -29,15 +29,10 @@
 
 5. Run Rails server
 	1. On foreground process
-	
-		`>> sudo rails s -b 0.0.0.0 -p 80`
-	
-		0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
-
+		`>> rails s -b 0.0.0.0 -p 80`
+		- 0.0.0.0:80 allows wifi connection to server by name, ie: http://yonghyuns-macbook.local/)
 	2. In background process as daemon:
-	
-		`>> sudo rails s -b 0.0.0.0 -p80 -d`
-	
+		`>> rails s -b 0.0.0.0 -p80 -d`
 		* to kill daemon
 	
 			`>> cat tmp/pids/server.pid`

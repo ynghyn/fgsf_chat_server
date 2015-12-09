@@ -47,49 +47,39 @@
 
 ### Initializing Rails app
 
-#####Controller:
-rails generate controller Chat
+#####1. Controller:
+* rails generate controller Chat
 
-#####DB initialization:
-rails generate model ChatRoom name:string private:boolean
+#####2. DB initialization:
+* rails generate model ChatRoom name:string private:boolean
+* rails generate model NameChange name:string user:references
+* rails generate model User macAdderss:string ipAdderss:string disabled:boolean lastLoggedInAt:timestamp
+* rails generate migration add_namechange_to_user namechange:references
+* rails generate model Message message:string user:references chatroom:references
+* rails generate migration add_color_to_user color:string
+* rake db:migrate
 
-rails generate model NameChange name:string user:references
-
-rails generate model User macAdderss:string ipAdderss:string disabled:boolean lastLoggedInAt:timestamp
-
-rails generate migration add_namechange_to_user namechange:references
-
-rails generate model Message message:string user:references chatroom:references
-
-rails generate migration add_color_to_user color:string
-rake db:migrate
-
-#####Router:
+#####3. Router:
 * chat#index - initial user creation and info gathering logic
 * chat/get_messages - retrieves last N messages for selected chatroom
 * chat/create_message - posts a new message for current user
 * chat/update_name - updates name of current user
 * chat/update_color - chat#update_color'
 
-#####Models:
+#####4. Models:
 - User, NameChange, ChatRoom, Message
 
-#####Views:
+#####5. Views:
 - Bootstrap, jQuery color picker
 
 
 #### FUTURE WORK:
 
 1. For TCP enabled client-server connection, use Puma
-
-gem 'puma'
-
-bundle exec puma -p 80
-
-site: http://ngauthier.com/2013/02/rails-4-sse-notify-listen.html
-
-site: http://tenderlovemaking.com/2012/07/30/is-it-live.html
-
-puma: http://puma.io/
+	- gem 'puma'
+	- bundle exec puma -p 80
+	- site: http://ngauthier.com/2013/02/rails-4-sse-notify-listen.html
+	- site: http://tenderlovemaking.com/2012/07/30/is-it-live.html
+	- puma: http://puma.io/
 
 

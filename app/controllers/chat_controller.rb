@@ -9,7 +9,10 @@ class ChatController < ApplicationController
       }
       user
     else
-      User.find(cookies[:user_id])
+      user = User.find(cookies[:user_id])
+      user.lastLoggedInAt = Time.now
+      user.save
+      user
     end
     @chatroom_id = ChatRoom::PUBLIC_CHATROOM_ID
     @user = current_user
@@ -19,8 +22,15 @@ class ChatController < ApplicationController
 
   def get_messages
     raise ArgumentError.new("invalid argument") unless params[:chatroom_id]
-    messages = Message.get_new_messages(params[:message_id].to_i, params[:chatroom_id])
-    render json: format_json_messages(messages)
+    User.update_last_logged_in(params[:user_id].to_i)
+    bypass = params[:bypass].to_s == "true"
+    messages = Message.get_new_messages(params[:message_id].to_i, params[:chatroom_id].to_i, bypass)
+    formatted_messages = messages ? format_messages(messages) : {}
+    render json: {
+      :messages => formatted_messages,
+      :lastMessageId => Message.last_message_id,
+      :activeUsers => User.currently_active_users.map { |user_id, user| user.name }
+    }
   end
 
   def update_name
@@ -43,11 +53,8 @@ class ChatController < ApplicationController
   def create_message
     raise ArgumentError.new("invalid argument") unless params[:user_id] && params[:chatroom_id] && params[:message]
     user = User.find(params[:user_id])
-    chatroom = ChatRoom.find(params[:chatroom_id])
-    message = params[:message]
-    Message.create(:user => user, :chatroom_id => chatroom.id, :message => message)
-    messages = Message.get_last_messages(params[:chatroom_id])
-    render json: format_json_messages(messages)
+    Message.create(:user => user, :chatroom_id => params[:chatroom_id], :message => params[:message])
+    render json: {}
   end
 
   private
@@ -56,16 +63,16 @@ class ChatController < ApplicationController
     User.create(:lastLoggedInAt => Time.now)
   end
 
-  def format_json_messages(messages)
-	  converted_messages = messages.map do |message|
+  # Convert ActiveRecord into hash for a json response
+  def format_messages(messages)
+	  messages.map do |message|
       time = message.created_at.in_time_zone("Pacific Time (US & Canada)")
       {
         :color => message.user.color,
-        :time => time.strftime("%b%e-%l:%M%P"),
+        :time => time.strftime("%b%e-%l:%M%P"), # "Dec 7 - 1:20pm"
         :username => message.user.name,
         :message => message.message
       }
 		end
-    { :messages => converted_messages, :lastMessageId => messages.last.id }
   end
 end

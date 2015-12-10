@@ -24,11 +24,13 @@ class ChatController < ApplicationController
     raise ArgumentError.new("invalid argument") unless params[:chatroom_id]
     User.update_last_logged_in(params[:user_id].to_i)
     bypass = params[:bypass].to_s == "true"
-    messages = Message.get_new_messages(params[:message_id].to_i, params[:chatroom_id].to_i, bypass)
+    force_refresh = User.users_were_updated
+    messages = Message.get_new_messages(params[:message_id].to_i, params[:chatroom_id].to_i, bypass || force_refresh)
     formatted_messages = messages ? format_messages(messages) : {}
     render json: {
       :messages => formatted_messages,
       :lastMessageId => Message.last_message_id,
+      :forceRefresh => force_refresh,
       :activeUsers => User.currently_active_users.map { |user_id, user| user.name }
     }
   end

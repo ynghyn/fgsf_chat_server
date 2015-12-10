@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
 			bypass: bypass
 		}
 		$.get("chat/get_messages", data, function(data) {
-			if (data.lastMessageId > lastMessageId || !!bypass) {
+			if (data.lastMessageId > lastMessageId || !!bypass || data.forceRefresh) {
 				var msgHtml = "";
 				$.each(data.messages, function(index, message) {
 					var color = message.color ? message.color : "#000000";

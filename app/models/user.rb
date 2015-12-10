@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def self.currently_active_users
-    @@all_users.select { |user_id, user| user.lastLoggedInAt && user.lastLoggedInAt > 1.minute.ago }
+    @@all_users.select { |user_id, user| user.lastLoggedInAt && user.lastLoggedInAt > 7.seconds.ago }
+  end
+
+  def self.users_were_updated
+    !!@@all_users.find { |user_id, user| user.updated_at > 4.seconds.ago }
   end
 
   def name

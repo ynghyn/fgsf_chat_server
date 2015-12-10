@@ -5,26 +5,24 @@ jQuery(document).ready(function($) {
 	var username = $nameChange.text();
 	var $dropdownUsers = $('#dropdown_users');
 	var imgGreenDotHTML = $('#imgGreenDot').html();
-	
-	$("#name_change").click(function(e) {
-		e.preventDefault();
+
+	// blur() is called when focus is lost
+	$('#name_change').blur(function() {
 		toggleName();
 	});
 	
 	$('#name_change').keydown(function(e) {
     // trap the Return key being pressed
     if (e.keyCode === 13) {
-			toggleName();
+			$('#name_change').blur();
       // prevent the default behaviour of return key pressed
       return false;
     }
   });
 
-	// Update use's name if name change has been made
+	// Update use's name if username change has been made
 	function toggleName() {
-		var isEditable = $nameChange.is('.editable');
-		$nameChange.prop('contenteditable', !isEditable).toggleClass('editable');
-		if (isEditable && username != $nameChange.text()) {
+		if (username != $nameChange.text()) {
 			var data = {
 				user_id: $userId.val(),
 				name: $nameChange.text()
@@ -105,7 +103,7 @@ jQuery(document).ready(function($) {
 		// Grab initial messages and 3 second interval AJAX calls
 		refreshView(true);
 		setInterval(refreshView, 3000, false);
-		
+
 		// Initialize hex color and color picker
 		$('#colorpicker').val($('#color').val());
 		$('#colorpicker').minicolors();

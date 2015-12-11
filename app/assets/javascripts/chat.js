@@ -65,6 +65,7 @@ jQuery(document).ready(function($) {
 			// clear message
 			$("#message").val('');
 		}
+		$("#message").focus();
 	}
 
 	// Refreshes message box if newer messsage has been found

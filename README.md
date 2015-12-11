@@ -2,6 +2,13 @@
 
 ### SETUP
 - For Ubuntu, refer to http://railsapps.github.io/installrubyonrails-ubuntu.html
+- sudo apt-get update
+- sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+- sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev autoconf libc6-dev ncurses-dev automake libtool
+- sudo apt-get install libgmp-dev
+- rvm requirements
+- gem install bundler
+- gem install rails -v 4.2.5
 
 1. Setup RVM with Ruby 2.2.3 (SQLite is given by RVM and Rails 4.2.5 is defined within the Rails project)
 
